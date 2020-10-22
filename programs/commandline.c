@@ -43,7 +43,7 @@
 #include <string.h>   /* strcmp, strcat */
 #include "bench.h"
 #include "fileio.h"   /* FIO_setCompressor */
-
+#include <stdint.h>   
 
 /*-*************************************************
 *  OS-specific Includes
@@ -311,8 +311,56 @@ int main(int argc, const char** argv)
     if (!strcmp(output_filename,stdoutmark) && IS_CONSOLE(stdout)) badusage(programName);
 
     FIO_setDisplayLevel(displayLevel);
-    if (decode) FIO_decompressFilename(output_filename, input_filename);
+    if (decode) {
+        FIO_decompressFilename(output_filename, input_filename);
+    }
     else {
+        //FILE* finput = fopen(input_filename, "rb");
+        //FILE* foutput1 = fopen("buff1.data" , "wb" );
+        //FILE* foutput2 = fopen("buff2.data" , "wb" );
+        //long length;
+        //uint8_t* in_buff;
+        //uint8_t* out_buff1;
+        //uint8_t* out_buff2;
+        //if (finput)
+        //{
+        //    fseek (finput, 0, SEEK_END);
+        //    length = ftell (finput);
+        //    fseek (finput, 0, SEEK_SET);
+        //    in_buff = malloc (length);
+        //    if (in_buff)
+        //    {
+        //        fread (in_buff, 1, length, finput);
+        //    }
+        //    fclose (finput);
+
+        //}
+        //if (length%2 == 0){
+        //    out_buff1 = malloc ((long)length/2);
+        //    out_buff2 = malloc ((long)length/2);
+        //}
+        //else{
+        //    out_buff1 = malloc ((long)(length+1)/2);
+        //    out_buff1 = malloc ((long)(length-1)/2);
+        //}
+        //for (long j = 0; j<length/2;j ++)
+        //{
+        //    out_buff1[j] = in_buff[j*2];
+        //    out_buff2[j] = in_buff[j*2+1];
+        //}
+        //if (length%2 != 0){
+        //    out_buff1[(long) (length-1)/2] = in_buff[length-1];
+        //}
+        //if (length%2 == 0){
+        //    fwrite(out_buff1, 1, (long) length/2, foutput1);
+        //    fwrite(out_buff2, 1, (long) length/2, foutput2);
+        //}
+        //else{
+        //    fwrite(out_buff1, 1, (long) (length+1)/2, foutput1);
+        //    fwrite(out_buff2, 1, (long) (length-1)/2, foutput2);
+        //}
+        //fclose (foutput1);
+        //fclose (foutput2);
         FIO_setCompressor(compressor);
         FIO_compressFilename(output_filename, input_filename);
     }
